@@ -26,6 +26,18 @@ app.post('/jobs', function(req, res){
     jobs.push(newJob);
     res.status(201).json(newJob);
 })
+app.put('/jobs/:id', function(req, res){
+    const foundJob = jobs.find(function(job){
+    return job.id === Number(req.params.id);
+    })
+    if (!foundJob){
+    return res.status(404).json({"Message": "Job not found"});
+    }
+    foundJob.company = req.body.company;
+    foundJob.role = req.body.role;
+    foundJob.status = req.body.status;
+    res.status(200).json({"Message":"Job Updated"});
+});
 
 
 app.listen(3000, function(){
