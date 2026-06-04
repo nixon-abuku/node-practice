@@ -49,6 +49,14 @@ app.delete('/jobs/:id', function(req, res){
      res.status(200).json({"Message": "Job deleted Successfully"});
 });
 
+app.use(function(req,res){
+    return res.status(404).json({"Message": "Route not Found"})
+});
+app.use(function(err, req, res, next){
+    return res.status(500).json({"Message": "Internal server error "})
+});
 app.listen(3000, function(){
     console.log("Server started");
 });
+
+
